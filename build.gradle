@@ -1,0 +1,72 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {url "https://plugins.gradle.org/m2/"}
+    }
+    dependencies {
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE')
+        classpath('gradle.plugin.com.github.newnewcoder:jboss-curl-gradle-plugin:1.0.1-SNAPSHOT')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'com.github.newnewcoder.jboss-curl-gradle-plugin'
+apply plugin: 'idea'
+
+war {
+    archiveName = "DEMO.war"
+}
+
+jar {
+    baseName = 'DEMO'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework.security:spring-security-test")
+    //testCompile "com.codeborne:selenide:3.6"
+    testCompile "org.seleniumhq.selenium:selenium-java:2.+"
+    testCompile "org.assertj:assertj-core:1.5.0"
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")//for war
+}
+
+test {
+    ignoreFailures = true
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4'
+}
+
+springBoot {
+    mainClass = "hello.Application"
+}
+
+
+jboss {
+//    host = 'jboss'
+    host = 'localhost'
+    port = '9990'
+//    user = 'jbossadmin'
+//    password = 'jboss@min1'
+    user = 'admin'
+    password = 'admin'
+    warName = "DEMO.war"
+    warPath = "${buildDir}/libs"
+    debug = false
+}
+
+deploy.dependsOn war

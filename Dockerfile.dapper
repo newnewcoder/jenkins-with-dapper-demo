@@ -1,0 +1,13 @@
+# Pull base image.
+FROM newnewcoder/selenium-chrome-jdk8
+
+# Setting dapper.
+ENV DAPPER_RUN_ARGS --privileged
+ENV DAPPER_SOURCE /usr/project
+ENV DAPPER_OUTPUT build
+WORKDIR ${DAPPER_SOURCE}
+
+ENV DISPLAY :99
+
+# Run gradle build
+CMD ["/bin/bash", "-l", "-c", "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16; ./gradlew build --stacktrace"]

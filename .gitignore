@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+
+# gradle
+.gradle/
+build/
+
+# intellij
+.idea/
+target/
+out/
+*.iml
+*.ipr
+*.iws

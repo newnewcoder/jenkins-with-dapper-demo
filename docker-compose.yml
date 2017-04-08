@@ -1,0 +1,17 @@
+version: '2'
+services:
+  jboss:
+    image: newnewcoder/jboss-wildfly
+    container_name: jboss
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+  jenkins:
+    image: newnewcoder/jenkins-dood-dapper
+    container_name: jenkins
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # change it
+      - /path/to/jenkins/home:/var/jenkins_home
+    ports:
+      - "8081:8080"
