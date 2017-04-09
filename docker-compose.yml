@@ -11,7 +11,7 @@ services:
     container_name: jenkins
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      # change it
-      - /path/to/jenkins/home:/var/jenkins_home
+      # change "/Users/Pinky/jenkins/home" to your own
+      - /Users/Pinky/jenkins/home:/var/jenkins_home
     ports:
       - "8081:8080"

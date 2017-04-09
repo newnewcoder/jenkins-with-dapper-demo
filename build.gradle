@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {url "https://plugins.gradle.org/m2/"}
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath('org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE')
@@ -16,11 +16,11 @@ apply plugin: 'com.github.newnewcoder.jboss-curl-gradle-plugin'
 apply plugin: 'idea'
 
 war {
-    archiveName = "DEMO.war"
+    archiveName = "demo.war"
 }
 
 jar {
-    baseName = 'DEMO'
+    baseName = 'demo'
 }
 
 repositories {
@@ -42,10 +42,17 @@ dependencies {
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")//for war
 }
 
+import static org.apache.tools.ant.taskdefs.condition.Os.*
 test {
     ignoreFailures = true
+    String driver = 'chromedriver-v2.29.exe'
+    if (isFamily(FAMILY_MAC)) {
+        driver = 'chromedriver_mac-v2.29'
+    } else if (isFamily(FAMILY_UNIX)) {
+        driver = 'chromedriver_linux-v2.29'
+    }
+    systemProperty('webdriver.chrome.driver', "${projectDir}/chromeDrivers/${driver}")
 }
-
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4'
@@ -55,16 +62,12 @@ springBoot {
     mainClass = "hello.Application"
 }
 
-
 jboss {
-//    host = 'jboss'
-    host = 'localhost'
+    host = 'jboss'
     port = '9990'
-//    user = 'jbossadmin'
-//    password = 'jboss@min1'
     user = 'admin'
     password = 'admin'
-    warName = "DEMO.war"
+    warName = "demo.war"
     warPath = "${buildDir}/libs"
     debug = false
 }

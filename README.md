@@ -1,10 +1,6 @@
-# JENKINS CI DEMO
+# This is a simple Jenkins CI flow demo
 
-docker-compose up -d
+## Introduce 
 
-setting jenkins
-
-add jenkins pipline job
-
-run job
-
+Based on [Spring securing web sample](https://github.com/spring-guides/gs-securing-web),
+I add selenium tests and change some code for packaging a war.
