@@ -11,6 +11,7 @@ Docker - get from [here](https://store.docker.com/search?type=edition&offering=c
 ### Optional
 1. Java - get from [OpenJDK8](http://openjdk.java.net/install/) or [OracleJDK8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html).
 2. Dapper - get from [here](https://github.com/rancher/dapper).
+3. Chrome - get from [here](https://www.google.com.tw/chrome/browser/desktop/).
 
 ## How to run this demo
 ### Step 1.
